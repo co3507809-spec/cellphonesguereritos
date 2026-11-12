@@ -1,0 +1,58 @@
+@model IEnumerable<cellphonesguereritos.Models.Producto>
+
+@{
+    ViewData["Title"] = "Catalogo de Equipos";
+}
+
+<div class="container-fluid mt-4 mb-5 px-lg-5">
+    <div class="row">
+        <!-- Barra lateral de filtros -->
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-dark text-white fw-bold py-3">
+                    Filtros de Busqueda
+                </div>
+                    <div class="list-group list-group-flush">
+                        <a href="/Home/Catalogo" class="list-group-item list-group-item-action fw-bold">Todos los equipos</a>
+                        <a href="/Home/Catalogo?marca=Apple" class="list-group-item list-group-item-action">Apple</a>
+                        <a href="/Home/Catalogo?marca=Samsung" class="list-group-item list-group-item-action">Samsung</a>
+                        <a href="/Home/Catalogo?marca=Xiaomi" class="list-group-item list-group-item-action">Xiaomi</a>
+                        <a href="/Home/Catalogo?marca=Motorola" class="list-group-item list-group-item-action">Motorola</a>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cuadricula de Productos -->
+        <div class="col-lg-9">
+            <h3 class="fw-bold mb-4 text-dark">Resultados</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach (var item in Model)
+                {
+                    <div class="col">
+                        <a href="/Home/Detalles/@item.IdProducto" class="text-decoration-none text-dark">
+                            <div class="card h-100 border-0 shadow-sm custom-card-hover rounded-3">
+                                <!-- CORRECCION DE IMAGEN: Usa BD, si esta vacia usa placeholder -->
+                                <img src="@(string.IsNullOrWhiteSpace(item.UrlImagen) ? "https://images.unsplash.com/photo-1598327105666-5b89351cb31b?q=80&w=500&auto=format&fit=crop" : item.UrlImagen)" 
+                                     class="card-img-top p-4" alt="@item.Nombre" style="object-fit: contain; height: 260px; background-color: #ffffff;">
+                                
+                                <div class="card-body border-top bg-light">
+                                    <p class="text-muted small mb-1 text-uppercase fw-bold">@item.IdMarcaNavigation?.Nombre</p>
+                                    <h6 class="card-title fw-bold mb-2 text-truncate">@item.Nombre @item.Modelo</h6>
+                                    <h4 class="fw-bold mb-2 text-primary">$@item.Precio.ToString("N2")</h4>
+                                    <p class="text-success small mb-0 fw-bold">Envio gratis</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .custom-card-hover:hover { transform: translateY(-8px); box-shadow: 0 1rem 3rem rgba(0,0,0,.15)!important; }
+</style>

@@ -1,0 +1,47 @@
+@{ ViewData["Title"] = "Crear Cuenta"; }
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-12 bg-white p-5">
+                        <h3 class="fw-bold text-center text-dark mb-1">Crear cuenta</h3>
+                        <p class="text-muted text-center mb-4 small">Regístrate como cliente para ver tu perfil.</p>
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger text-center small fw-bold">@ViewBag.Error</div>
+                        }
+
+                        <form asp-action="Registrar" method="post">
+                            <div class="mb-3">
+                                <label class="form-label text-muted fw-bold small">Nombre</label>
+                                <input type="text" name="nombre" maxlength="100" class="form-control form-control-lg bg-light" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted fw-bold small">Correo Electronico</label>
+                                <input type="email" name="correo" maxlength="100" class="form-control form-control-lg bg-light" placeholder="usuario@correo.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted fw-bold small">Contraseña</label>
+                                <input type="password" name="password" minlength="6" maxlength="100" class="form-control form-control-lg bg-light" placeholder="Mínimo 6 caracteres" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold small">Confirmar contraseña</label>
+                                <input type="password" name="confirmar" minlength="6" maxlength="100" class="form-control form-control-lg bg-light" placeholder="Repite la contraseña" required>
+                            </div>
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-dark btn-lg fw-bold">Crear Cuenta</button>
+                            </div>
+                            <div class="text-center mt-4">
+                                <span class="text-muted">¿Ya tienes cuenta?</span>
+                                <a asp-action="Login" class="text-primary fw-bold text-decoration-none ms-1">Iniciar Sesion</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

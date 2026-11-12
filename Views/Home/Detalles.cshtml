@@ -1,0 +1,51 @@
+@model cellphonesguereritos.Models.Producto
+
+@{
+    ViewData["Title"] = Model.Nombre;
+}
+
+<div class="container mt-5 mb-5 bg-white p-4 rounded shadow-sm">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Catalogo" class="text-decoration-none">Catalogo</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">@Model.IdCategoriaNavigation?.Nombre</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Nombre</li>
+        </ol>
+    </nav>
+
+    <div class="row mt-4">
+        <!-- Columna de Imagen -->
+        <div class="col-md-6 text-center mb-4">
+            <img src="@Model.UrlImagen" class="img-fluid rounded border p-2" alt="@Model.Nombre" style="max-height: 500px; object-fit: contain;">
+        </div>
+
+        <!-- Columna de Informacion -->
+        <div class="col-md-6">
+            <p class="text-muted mb-1">Nuevo | @Model.Stock vendidos</p>
+            <h2 class="fw-bold mb-3">@Model.Nombre @Model.Modelo</h2>
+            
+            <h1 class="fw-bold mb-3">$@Model.Precio.ToString("N2")</h1>
+            <p class="text-dark">en <span class="text-success fw-semibold">12x de $@((Model.Precio / 12).ToString("N2")) sin intereses</span></p>
+
+            <h5 class="fw-bold mt-4 mb-3">Caracteristicas principales</h5>
+            <ul class="list-unstyled">
+                <li class="mb-2"><strong>Marca:</strong> @Model.IdMarcaNavigation?.Nombre</li>
+                <li class="mb-2"><strong>Memoria RAM:</strong> @Model.RamGb GB</li>
+                <li class="mb-2"><strong>Almacenamiento:</strong> @Model.AlmacenamientoGb GB</li>
+                <li class="mb-2">
+                    <strong>Disponibilidad:</strong> 
+                    @if (Model.Stock > 0) { <span class="text-success fw-semibold">En stock (@Model.Stock disponibles)</span> }
+                    else { <span class="text-danger fw-semibold">Agotado</span> }
+                </li>
+            </ul>
+
+            <h5 class="fw-bold mt-4 mb-2">Descripcion</h5>
+            <p class="text-muted">@Model.Descripcion</p>
+
+            <div class="d-grid gap-2 mt-5">
+                <button class="btn btn-primary btn-lg fw-bold" type="button">Comprar ahora</button>
+                <button class="btn btn-outline-primary btn-lg fw-semibold" type="button">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
